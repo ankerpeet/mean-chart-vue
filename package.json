@@ -1,6 +1,6 @@
 {
   "name": "mean-chart-vue",
-  "version": "1.0.27",
+  "version": "1.0.33",
   "description": "A simple component library to be used with Vue for creating graphs and other data visualizations.",
   "main": "dist/bar-graph.umd.js",
   "module": "dist/bar-graph.esm.js",
@@ -16,11 +16,18 @@
     "serve": "vue-cli-service serve"
   },
   "keywords": [
-    "data", "vue", "graphs", "bar", "graph", "chart"
+    "data",
+    "vue",
+    "graphs",
+    "bar",
+    "graph",
+    "chart"
   ],
   "author": "Anker Peet",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "mean-chart": "^1.0.31"
+  },
   "devDependencies": {
     "@rollup/plugin-buble": "^0.21.3",
     "@rollup/plugin-commonjs": "^11.1.0",

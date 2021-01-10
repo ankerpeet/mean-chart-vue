@@ -9,7 +9,7 @@
         
         <div class="middle-bar-graph" :style="{height:options.height}">
             <div class="bar-graph-scale">          
-            <div class="bar-graph-scale-item-container" v-for="(i, index) in generateScale()" :key="index">
+            <div class="bar-graph-scale-item-container" v-for="(i, index) in scale" :key="index">
                 <span class="bar-graph-scale-item scale-label">{{i}}</span>
                 <div class="bar-graph-scale-background" v-for="(d, index) in dataPoints" :key="index"></div>
             </div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import MeanChart from "mean-chart";
 export default {
     name: "BarGraph",
     props: ["data", "config"],
@@ -42,7 +43,8 @@ export default {
                 minVal: 0,
                 maxVal: 100,
                 interval: 10
-            }
+            },
+            scale: []
         }
     },
     computed: {
@@ -53,60 +55,20 @@ export default {
         if(this.config.height) {
             this.options.height = this.config.height;
         }
+
         if(this.config.width) {
             this.options.width = this.config.width;
         }
 
-        this.setMinVal(0);
-
         if(this.dataPoints.length > 0) {
-            this.setMaxVal(this.dataPoints);
-            this.setInterval(this.options.maxVal);
-            this.normalizeData(this.dataPoints);
+            let chart = MeanChart(this.dataPoints);            
+            this.scale = chart.scale;
+            this.dataPoints = chart.data;
+            this.options.maxVal = chart.max;
+            this.options.interval = chart.interval;
         }
     },
     methods: {
-        generateScale: function() {
-            var arr = [];
-            for(var i = this.options.minVal; i < this.options.maxVal; i += this.options.interval) {
-                arr.push(i);
-            }
-            return arr;
-        },
-        normalizeData(data) {
-            for(var i = 0; i < data.length; i++) {                
-                this.dataPoints[i].percentage = this.dataPoints[i].count / this.options.maxVal * 100;
-            }
-        },
-        setMaxVal(data) {
-            var max = Math.max.apply(Math, data.map(function(o) { return o.count; }));
-            var rounder = this.findRounder(max);
-            this.options.maxVal = Math.ceil(max / rounder) * rounder;
-        },
-        setMinVal(val) {
-            this.options.minVal = val;
-        },
-        setInterval(val) {
-            var divisor = 2;
-            for(var i = 10; i > 1; i-- ) {
-                console.log(i);
-                if(val % i == 0) {
-                    divisor = i;
-                    break;
-                }
-            }
-            this.options.interval = val / divisor;
-        },
-        findRounder(val) {
-            var rounder = 10;
-            if(val > 100) {
-                var length = val.toString().length;
-                for(var i = 0; i < length - 2; i++) {
-                    rounder = rounder * 10;
-                }
-            }
-            return rounder;
-        }
     }
 }
 </script>

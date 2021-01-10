@@ -3,7 +3,11 @@ import vue from 'rollup-plugin-vue'; // Handle .vue SFC files
 import buble from '@rollup/plugin-buble'; // Transpile/polyfill with reasonable browser support
 export default {
     input: 'src/wrapper.js', // Path relative to package.json
+    external: [ 'mean-chart' ],
     output: {
+        globals: {
+            'mean-chart': 'MeanChart'
+        },
         name: 'BarGraph',
         exports: 'named',
     },
