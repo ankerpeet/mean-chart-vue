@@ -1,5 +1,5 @@
 <template>
-    <div id="barGraph">
+    <div class="mean-chart-bar-graph">
         <div class="top-bar-graph">
             <div class="scale-label-max">
             <span class="bar-graph-scale-item scale-label">{{options.maxVal}}</span>        
@@ -73,80 +73,4 @@ export default {
 }
 </script>
 
-<style scoped>
-#barGraph {
-  text-align: center;
-}
-
-.no-data-message {
-    text-align: center;
-    font-size: 25px;
-    margin: 0 auto;
-    padding: 25px;
-}
-
-.top-bar-graph, .middle-bar-graph, .bottom-bar-graph, .bar-graph-scale, .scale-label, .scale-label-max, .bargraph-bars, .bar-graph-scale-item-container {
-  display: flex;
-}
-
-.top-bar-graph-item, .bar-graph-scale-item, .bar-graph-bar-container, .bar-graph-label, .bar-graph-scale-background {
-  flex: 1;
-}
-
-.scale-label-max, .bar-graph-scale-item, .bar-graph-label-spacer, .bar-graph-scale {
-  flex: .1;
-}
-
-.middle-bar-graph {
-  align-items: flex-end;
-  justify-content: space-between;
-  position: relative;
-}
-
-.bargraph-bars, .bar-graph-scale {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.bargraph-bars {
-  align-items: flex-end;
-}
-
-.bar-graph-scale {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column-reverse;
-}
-
-.bar-graph-scale-item-container {
-  height: 100%;
-}
-
-.bar-graph-scale-item {
-  align-items: flex-end;
-  height: 100%;
-}
-
-.bar-graph-bar {
-  height: 100%; /* Do NOT adjust the height, it will distort the data */
-  margin: 0 auto; /* Center the bar in the middle */
-  max-width: 15px;  
-  border-radius: 0 0 0 0 ;
-}
-
-.bar-graph-scale-item-container, .top-bar-graph {
-  border-bottom: #2c3e50 solid 1px;
-}
-
-/* .bar-graph-scale-background {
-  border-bottom: #2c3e50 solid 1px;
-}
-
-.scale-label {
-  margin-top: .5rem;
-  text-align: right;
-} */
-</style>
+<style src='mean-chart/styles/main.css' scoped></style>
